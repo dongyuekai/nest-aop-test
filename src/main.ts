@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { NextFunction, Request, Response } from 'express';
+import { LoginGuard } from './login.guard';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -9,6 +10,8 @@ async function bootstrap() {
     next();
     console.log('after---');
   });
+  // Guard过滤全局启用
+  // app.useGlobalGuards(new LoginGuard());
   await app.listen(3000);
 }
 bootstrap();
